@@ -6,6 +6,8 @@ import (
 
 func main() {
 
-	fmt.Println("tipoEndereco")
+	i := 10
+
+	fmt.Println("tipoEndereco", i)
 
 }
