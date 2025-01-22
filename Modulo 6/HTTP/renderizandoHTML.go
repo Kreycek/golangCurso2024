@@ -1,12 +1,17 @@
 package main
 
 import (
+	"html/template"
 	"log"
 	"net/http"
-	"text/template"
 )
 
 var templates *template.Template
+
+type usuario struct {
+	Nome  string
+	Email string
+}
 
 func main() {
 
@@ -14,16 +19,11 @@ func main() {
 	// URI - Identificador do Recurso
 	// Método - GET, POST, PUT, DELETE
 
+	templates = template.Must(template.ParseGlob("*.html"))
+
+	u := usuario{"Ricardo", "kreycek@gmail.com"}
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte("Página Raiz"))
-	})
-
-	http.HandleFunc("/home", func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte("Olá mundo"))
-	})
-
-	http.HandleFunc("/usuarios", func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte("Carregar usuários"))
+		templates.ExecuteTemplate(w, "home.html", u)
 	})
 
 	log.Fatal(http.ListenAndServe(":5000", nil))
