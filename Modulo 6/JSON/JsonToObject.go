@@ -12,7 +12,7 @@ type pessoa struct {
 	Nome     string `json:"-"`
 	Endereco string `json:"endereco"`
 	Nif      string `json:"nif"`
-}
+} 
 
 func main() {
 
